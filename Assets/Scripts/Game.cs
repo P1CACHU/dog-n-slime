@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    public Transform[] _gameObjects;
+	public GameObject _objectToInstantiate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.LogError("OOps");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("Message for students");
-    }
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			Dog dog = FindObjectOfType<Dog>();
+			if (dog != null)
+			{
+				Destroy(dog.gameObject);
+			}
+		}
+		
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			Instantiate(_objectToInstantiate);
+		}
+	}
 }
