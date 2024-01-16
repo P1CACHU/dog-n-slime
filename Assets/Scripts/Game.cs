@@ -1,23 +1,41 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-	public GameObject _objectToInstantiate;
+	[SerializeField] private GameObject _objectToInstantiate;
+	[SerializeField] private Transform _spawnPoint;
+	[SerializeField] private GameObject _camera;
+
+	private readonly List<GameObject> _objectsToDestroy = new();
+
+	private Vector3 _vector;
 
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			Dog dog = FindObjectOfType<Dog>();
-			if (dog != null)
+			if (_objectsToDestroy.Count > 0)
 			{
-				Destroy(dog.gameObject);
+				Destroy(_objectsToDestroy[0]);
+				_objectsToDestroy.RemoveAt(0);
 			}
 		}
-		
+
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			Instantiate(_objectToInstantiate);
+			var go = Instantiate(_objectToInstantiate, _spawnPoint.position, _spawnPoint.rotation);
+			var component = go.GetComponent<Dog>();
+			if (component != null)
+			{
+				component.SetCamera(_camera);
+			}
+			Register(go);
 		}
+	}
+
+	private void Register(GameObject objectToDestroy)
+	{
+		_objectsToDestroy.Add(objectToDestroy);
 	}
 }

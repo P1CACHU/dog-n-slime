@@ -1,9 +1,11 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Dog : MonoBehaviour
 {
+	[SerializeField] private float _movementSpeed;
+	[SerializeField] private float _rotationSpeed;
+	[SerializeField] private Transform _cameraMount;
+
 	private void Awake()
 	{
 		Debug.Log("Dog awaked");
@@ -14,33 +16,19 @@ public class Dog : MonoBehaviour
 		Debug.Log("Dog started");
 	}
 
-	// private void Update()
-	// {
-	// 	Debug.Log("Dog updated");
-	// }
-	//
-	// private void FixedUpdate()
-	// {
-	// 	Debug.Log("Dog fixed updated");
-	// }
-	//
-	// private void LateUpdate()
-	// {
-	// 	Debug.Log("Dog late updated");
-	// }
-
-	// private void OnEnable()
-	// {
-	// 	Debug.Log("Dog enabled");
-	// }
-	//
-	// private void OnDisable()
-	// {
-	// 	Debug.Log("Dog disabled");
-	// }
+	private void Update()
+	{
+		transform.Translate(Vector3.forward * (Input.GetAxis("Vertical") * _movementSpeed));
+		transform.Rotate(Vector3.up, _rotationSpeed * Input.GetAxis("Horizontal"));
+	}
 
 	private void OnDestroy()
 	{
 		Debug.Log("Dog destroyed");
+	}
+
+	public void SetCamera(GameObject cam)
+	{
+		cam.transform.SetParent(_cameraMount, false);
 	}
 }
