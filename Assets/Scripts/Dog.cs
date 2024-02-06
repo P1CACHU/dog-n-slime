@@ -17,11 +17,22 @@ public class Dog : MonoBehaviour
 
 	private Rigidbody _rb;
 
+	private float _xLook;
+	private float _xMove;
+	private float _yMove;
+
 	public int Score { get; private set; }
 
 	private void Start()
 	{
 		_rb = GetComponent<Rigidbody>();
+	}
+
+	private void FixedUpdate()
+	{
+		_rb.AddRelativeForce(Vector3.forward * (_movementSpeed * _yMove));
+		_rb.AddRelativeForce(Vector3.right * (_movementSpeed * _xMove));
+		_rb.AddRelativeTorque(Vector3.up * (_rotationSpeed * _xLook));
 	}
 
 	private void OnCollisionEnter(Collision other)
@@ -75,18 +86,21 @@ public class Dog : MonoBehaviour
 
 	public void OnMovePressed(InputAction.CallbackContext context)
 	{
-		transform.Translate(Vector3.forward * context.ReadValue<Vector2>().y * _movementSpeed);
-		transform.Rotate(Vector3.up, _rotationSpeed * context.ReadValue<Vector2>().x);
+		_xMove = context.ReadValue<Vector2>().x;
+		_yMove = context.ReadValue<Vector2>().y;
 	}
 
 	public void OnFirePressed(InputAction.CallbackContext context)
 	{
-		if (!context.performed || !(_nextShoot <= Time.time))
+		if (context.performed && _nextShoot <= Time.time)
 		{
-			return;
+			Instantiate(_bullet, _bulletSpawnPoint.position, _bulletSpawnPoint.localRotation).Shoot();
+			_nextShoot = Time.time + _shootingRate;
 		}
+	}
 
-		Instantiate(_bullet, _bulletSpawnPoint.position, _bulletSpawnPoint.localRotation).Shoot();
-		_nextShoot = Time.time + _shootingRate;
+	public void OnLookPressed(InputAction.CallbackContext context)
+	{
+		_xLook = context.ReadValue<Vector2>().x;
 	}
 }

@@ -1327,7 +1327,7 @@ GameObject:
   - component: {fileID: 6776271644118046199}
   - component: {fileID: 7311952454385898460}
   - component: {fileID: 2433471211899212251}
-  - component: {fileID: 7563639268816554663}
+  - component: {fileID: 3363824672529932558}
   m_Layer: 0
   m_Name: DogPBR
   m_TagString: Untagged
@@ -1384,8 +1384,8 @@ Rigidbody:
   m_GameObject: {fileID: 8422892626600285392}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 2
+  m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1421,8 +1421,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.2689846, z: 1}
-  m_Center: {x: 0, y: 0.635733, z: 0}
+  m_Size: {x: 0.703181, y: 1.2689846, z: 0.70249295}
+  m_Center: {x: 0.0047243387, y: 0.635733, z: 0.04467094}
 --- !u!114 &2433471211899212251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,14 +1435,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8dbd4825a1b47399f328d06f7188b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 0.02
-  _rotationSpeed: 0.4
+  _movementSpeed: 20
+  _rotationSpeed: 8
   _cameraMount: {fileID: 6469583146432947981}
   _jumpHeight: 400
   _bullet: {fileID: 4268276812450025661, guid: 37d94f50220e44f59a6c40ed1bf3411d, type: 3}
   _bulletSpawnPoint: {fileID: 13678206610772172}
   _shootingRate: 0.1
---- !u!114 &7563639268816554663
+--- !u!114 &3363824672529932558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1485,7 +1485,19 @@ MonoBehaviour:
     m_ActionId: db793f25-b280-4f6d-8b4e-6095e6ef9ca4
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2433471211899212251}
+        m_TargetAssemblyTypeName: Dog, Assembly-CSharp
+        m_MethodName: OnLookPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a2191a7c-d0df-4263-be85-5ed690cb8ac1
     m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
   - m_PersistentCalls:
@@ -1504,6 +1516,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3782bc45-483a-4225-a1c6-c6c9545967e4
     m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2433471211899212251}
+        m_TargetAssemblyTypeName: Dog, Assembly-CSharp
+        m_MethodName: OnJumpPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a8f696aa-13f5-42aa-8ff4-f43e6ba301a9
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b7b32eec-f273-415f-bd99-455601cd6225
+    m_ActionName: Player/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 25e641d8-4d37-4844-84b3-2a04aa8d6045
@@ -1544,24 +1576,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ee3ec69e-7b4a-4028-84e6-b557fc28b11f
     m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2433471211899212251}
-        m_TargetAssemblyTypeName: Dog, Assembly-CSharp
-        m_MethodName: OnJumpPressed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a8f696aa-13f5-42aa-8ff4-f43e6ba301a9
-    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

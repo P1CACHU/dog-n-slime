@@ -23,4 +23,14 @@ public class MenuView : MonoBehaviour
 	{
 		PauseClicked?.Invoke();
 	}
+
+	public void Hide()
+	{
+		gameObject.SetActive(false);
+	}
+
+	public void Show()
+	{
+		gameObject.SetActive(true);
+	}
 }

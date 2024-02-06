@@ -12,8 +12,13 @@ public class HudView : MonoBehaviour
 		_enemyLbl.text = slime.ToString();
 	}
 
-	public void OnMenuClick()
+	public void Hide()
 	{
-		
+		gameObject.SetActive(false);
+	}
+
+	public void Show()
+	{
+		gameObject.SetActive(true);
 	}
 }
