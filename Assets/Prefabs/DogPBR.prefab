@@ -1323,7 +1323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8422892626600249584}
-  - component: {fileID: 8422892626592999198}
+  - component: {fileID: 5172967551071089087}
   - component: {fileID: 6776271644118046199}
   - component: {fileID: 7311952454385898460}
   - component: {fileID: 2433471211899212251}
@@ -1354,7 +1354,7 @@ Transform:
   - {fileID: 13678206610772172}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8422892626592999198
+--- !u!95 &5172967551071089087
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -1365,8 +1365,8 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d9a1483b77bf10e4e851678ab6c2e54e, type: 3}
   m_Controller: {fileID: 9100000, guid: b60dc9aa529b314489f628aa3b57c470, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
+  m_CullingMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -1442,6 +1442,7 @@ MonoBehaviour:
   _bullet: {fileID: 4268276812450025661, guid: 37d94f50220e44f59a6c40ed1bf3411d, type: 3}
   _bulletSpawnPoint: {fileID: 13678206610772172}
   _shootingRate: 0.1
+  _anim: {fileID: 5172967551071089087}
 --- !u!114 &3363824672529932558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2705,7 +2706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ef625d01f79b4e4eb62fcdf032954ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -172.44
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ef625d01f79b4e4eb62fcdf032954ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

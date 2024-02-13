@@ -5,6 +5,10 @@ public class HudView : MonoBehaviour
 {
 	[SerializeField] private TMP_Text _playerLbl;
 	[SerializeField] private TMP_Text _enemyLbl;
+	[SerializeField] private Animation _anim;
+
+	private const string HudViewShowName = "HudViewShow";
+	private const string HudViewHideName = "HudViewHide";
 
 	public void RefreshScore(int dog, int slime)
 	{
@@ -14,11 +18,11 @@ public class HudView : MonoBehaviour
 
 	public void Hide()
 	{
-		gameObject.SetActive(false);
+		_anim.Play(HudViewHideName);
 	}
 
 	public void Show()
 	{
-		gameObject.SetActive(true);
+		_anim.Play(HudViewShowName);
 	}
 }

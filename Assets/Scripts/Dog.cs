@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Dog : MonoBehaviour
 {
+	private static readonly int Speed = Animator.StringToHash("Speed");
+	private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
+	private static readonly int Attack = Animator.StringToHash("Attack");
+
 	[SerializeField] private float _movementSpeed;
 	[SerializeField] private float _rotationSpeed;
 	[SerializeField] private Transform _cameraMount;
@@ -10,6 +14,7 @@ public class Dog : MonoBehaviour
 	[SerializeField] private Bullet _bullet;
 	[SerializeField] private Transform _bulletSpawnPoint;
 	[SerializeField] private float _shootingRate;
+	[SerializeField] private Animator _anim;
 
 	private EnemySpawner _enemySpawner;
 	private bool _isGrounded;
@@ -33,6 +38,7 @@ public class Dog : MonoBehaviour
 		_rb.AddRelativeForce(Vector3.forward * (_movementSpeed * _yMove));
 		_rb.AddRelativeForce(Vector3.right * (_movementSpeed * _xMove));
 		_rb.AddRelativeTorque(Vector3.up * (_rotationSpeed * _xLook));
+		_anim.SetFloat(Speed, _rb.velocity.magnitude);
 	}
 
 	private void OnCollisionEnter(Collision other)
@@ -47,6 +53,7 @@ public class Dog : MonoBehaviour
 		if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
 			_isGrounded = true;
+			_anim.SetBool(IsGrounded, _isGrounded);
 		}
 	}
 
@@ -57,6 +64,7 @@ public class Dog : MonoBehaviour
 		if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
 			_isGrounded = false;
+			_anim.SetBool(IsGrounded, _isGrounded);
 		}
 	}
 
@@ -92,11 +100,7 @@ public class Dog : MonoBehaviour
 
 	public void OnFirePressed(InputAction.CallbackContext context)
 	{
-		if (context.performed && _nextShoot <= Time.time)
-		{
-			Instantiate(_bullet, _bulletSpawnPoint.position, _bulletSpawnPoint.localRotation).Shoot();
-			_nextShoot = Time.time + _shootingRate;
-		}
+		_anim.SetTrigger(Attack);
 	}
 
 	public void OnLookPressed(InputAction.CallbackContext context)

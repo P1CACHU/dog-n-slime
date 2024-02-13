@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class MenuView : MonoBehaviour
 {
+	private const string HideAnimationName = "MenuViewHide";
 	[SerializeField] private TMP_Text _winnerLabel;
+	[SerializeField] private Animation _anim;
+
+	private Action _closeClicked;
 
 	public event Action RestartClicked;
 	public event Action PauseClicked;
+
+	public void SetCloseCallback(Action close)
+	{
+		_closeClicked = close;
+	}
 
 	public void SetWinner(string text)
 	{
@@ -24,13 +33,19 @@ public class MenuView : MonoBehaviour
 		PauseClicked?.Invoke();
 	}
 
-	public void Hide()
+	public void OnCloseClick()
 	{
-		gameObject.SetActive(false);
+		Hide();
+		_closeClicked?.Invoke();
 	}
 
-	public void Show()
+	private void Hide()
 	{
-		gameObject.SetActive(true);
+		_anim.Play(HideAnimationName);
+	}
+
+	public void OnHideComplete()
+	{
+		Destroy(gameObject);
 	}
 }
